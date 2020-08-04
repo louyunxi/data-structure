@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链表 及常见操作</title>
+</head>
+<body>
+    <script>
+        //封装链表类
+        function LinkedList(){
+            //属性
+            this.head=null;
+            this.length=0;
+        }
+        //节点类
+        function Node(data){
+            this.data=data;
+            this.next=null;
+        }
+        //尾部添加一新项
+        LinkedList.prototype.append=function(data){
+            if(this.length===0){
+                this.head=new Node(data);
+                this.length=1;
+            }else{
+                var newnode=new Node(data);
+                var current=this.head;
+                var i=2;
+                while(current.next){
+                    current=current.next;
+                    i++;
+                }
+                current.next=newnode;
+                this.length=i;
+            }
+        }
+        //向链表特定位置插入新项
+        LinkedList.prototype.insert=function(position,data){
+            var current=this.get(position);
+            var nextitem=current.next;
+            var insertitem=new Node(data);
+            current.next=insertitem;
+            insertitem.next=nextitem;
+            this.length++;
+        }
+        //获取链表对应位置的元素
+        LinkedList.prototype.get=function(position){
+            var pos=position;
+            if(position>this.length-1){
+                pos=this.length-1;
+            }
+            var current=this.head;
+            while(pos--){
+                current=current.next;
+            }
+            return current;
+        }
+        //返回元素在链表中的索引
+        LinkedList.prototype.indexOf=function(data){
+            var index=-1;
+            var current=this.head,i=0;
+            while(current && current.data){
+                if(current.data===data){
+                    index=i;
+                }
+                current=current.next;
+                i++;
+            }
+            return index;
+        }
+        //修改某位置元素
+        LinkedList.prototype.update=function(position,data){
+            var current=this.get(position);
+            current.data=data;
+        }
+        var linklist=new LinkedList();
+        linklist.append('11');
+        linklist.append('22');
+        linklist.append('33');
+        linklist.insert(2,'44');
+        linklist.update(3,'444');
+        console.log(linklist);
+        console.log(linklist.get(2));
+        console.log(linklist.indexOf('44'));
+    </script>
+</body>
+</html>
