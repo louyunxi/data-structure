@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Queue(){
+            this.items=[];
+        }
+        //加入队列
+        Queue.prototype.addqueue=function(element){
+            this.items.push(element)
+        }
+        //删除队列
+        Queue.prototype.dequeue=function(element){
+            return this.items.shift();
+        }
+        //查看前端元素
+        Queue.prototype.front=function(){
+            return this.items[0];
+        }
+        //查看队列是否为空
+        Queue.prototype.isEmpty=function(){
+            return this.items.length===0;
+        }
+        //查看元素个数
+        Queue.prototype.size=function(){
+            return this.items.length;
+        }
+        //toString
+        Queue.prototype.toString=function(){
+            var str='',i=0;
+            while(i<this.items.length){
+                str+=this.items[i]+'';
+                i++;
+            }
+            return str;
+        }
+        var qq=new Queue();
+        qq.addqueue(1);
+        qq.addqueue(2);
+        qq.addqueue(3);
+        console.log(qq.dequeue(3));
+        console.log(qq.front());
+        console.log(qq.isEmpty());
+        console.log(qq.size());
+        console.log(qq.toString());
+
+
+        //击鼓传花
+        var arr=['lili','tom','yuehan','lilei','hanmei','jery'];
+        var num=4;
+        function jgch_game(num,arr){
+            var queue=new Queue();
+            //所有人 加入队列
+            for(var i=0,len=arr.length;i<len;i++){
+                queue.addqueue(arr[i]);
+            }
+            while(queue.size()>1){
+                for(var j=0;j<num-1;j++){
+                    queue.addqueue(queue.dequeue());
+                }
+                queue.dequeue();
+            }
+            var endname=queue.front();
+            return arr.indexOf(endname);
+        }
+        console.log(jgch_game(num,arr));
+    </script>
+</body>
+</html>

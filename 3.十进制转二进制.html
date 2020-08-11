@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function tenTotwo(n){
+            var twon=[];
+            n=Math.abs(parseInt(n)) || 0;
+            while(n>0){
+                var val=n%2;
+                twon.unshift(val);
+                n=Math.floor(n/2);
+            }
+            return twon.join('');
+        }
+        console.log(tenTotwo(100))
+        console.log(tenTotwo(-1))
+        console.log(tenTotwo(true))
+        console.log(tenTotwo(12.365))
+        console.log(tenTotwo(4))
+        console.log(tenTotwo(8))
+    </script>
+</body>
+</html>
